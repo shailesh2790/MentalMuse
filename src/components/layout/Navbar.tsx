@@ -1,14 +1,18 @@
 // src/components/layout/Navbar.tsx
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Users, Award, Trophy, Mic, LogOut } from 'lucide-react';
+import { Home, Users, Award, Trophy, Mic, LogOut, Heart } from 'lucide-react';
 
 export default function Navbar() {
   const location = useLocation();
 
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userType');
+    localStorage.removeItem('email');
+    localStorage.removeItem('userData');
+
     window.location.href = '/login';
   };
 
@@ -19,7 +23,7 @@ export default function Navbar() {
           {/* Logo/Brand */}
           <div className="flex items-center">
             <Link to="/" className="text-2xl font-semibold text-teal-600">
-              MentalMuse
+              MindMuse
             </Link>
           </div>
 
@@ -50,6 +54,20 @@ export default function Navbar() {
               <div className="flex items-center space-x-2">
                 <Users className="w-4 h-4" />
                 <span>Community</span>
+              </div>
+            </Link>
+
+            <Link
+              to="/acceptance-therapy"
+              className={`px-3 py-2 rounded-md text-sm font-medium ${
+                location.pathname === '/acceptance-therapy' 
+                  ? 'text-teal-600 bg-teal-50' 
+                  : 'text-gray-600 hover:text-teal-600 hover:bg-teal-50'
+              }`}
+            >
+              <div className="flex items-center space-x-2">
+                <Heart className="w-4 h-4" />
+                <span>Support Group</span>
               </div>
             </Link>
 
